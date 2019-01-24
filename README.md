@@ -12,7 +12,7 @@ This is a wrapper around http://duplicacy.com web GUI.
 ## To run
 An example for appropriate volume mappings:
 ``` bash 
- docker run --name duplicaty-web \
+ docker run --name duplicacy-web \
             -p 3875:3875/tcp \
             -v ~/Library/Duplicacy:/config  \
             -v ~/Library/Logs/Duplicacy/:/logs \

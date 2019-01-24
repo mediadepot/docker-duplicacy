@@ -16,4 +16,4 @@ VOLUME /cache
 
 EXPOSE 3875/tcp
 
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+CMD [ "/usr/local/bin/entrypoint.sh" ]

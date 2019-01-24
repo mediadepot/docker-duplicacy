@@ -2,38 +2,34 @@
 
 # trap ^C
 trap 'kill ${!}; exit' SIGHUP SIGINT SIGQUIT SIGTERM
-         
-echo  "Creating duplicacy folders"
-                                     
-mkdir -p    ~/.duplicacy-web/logs \
-            ~/.duplicacy-web/filters \
-            ~/.duplicacy-web/repositories 
-            
-            
+
+
 echo "Creating sane exports and files"
-mkdir -p    /config/filters \
+mkdir -p    /config \
             /logs \
             /cache 
 
-touch       /logs/duplicacy_web.log
-            
-            
-echo '{"listening_address":"0.0.0.0:3875"}' > /config/settings.json
-echo '{}'                                   > /config/duplicacy.json
+ln -s /config/  ~/.duplicacy-web
+ 
+touch /logs/duplicacy_web.log
 
-echo "Link data to where duplicacy expects it"
+if [ ! -f /config/settings.json ]; then
+    echo '{
+        "listening_address"     : "0.0.0.0:3875",
+        "log_directory"         : "/logs",
+        "temporary_directory"   : "/cache"
+    }'          > /config/settings.json
+fi
 
-ln -s /config/settings.json     ~/.duplicacy-web/settings.json                  
-ln -s /config/duplicacy.json    ~/.duplicacy-web/duplicacy.json
-ln -s /config/filters           ~/.duplicacy-web/filters
-ln -s /logs                     ~/.duplicacy-web/logs
-ln -s /cache                    ~/.duplicacy-web/repositories
+if [ ! -f /config/duplicacy.json ]; then
+    echo '{}'   > /config/duplicacy.json
+
+fi
 
 echo "Logging tail of the log from this moment on"
 tail -0 -f /logs/duplicacy_web.log & 
-
+ 
 echo Starting duplicacy
 duplicacy_web &
 
-# wait for events.
-wait
+wait 
