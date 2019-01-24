@@ -22,3 +22,6 @@ An example for appropriate volume mappings:
 ```
 ## To use
 Go to http://hostname:3875
+
+## Source
+https://bitbucket.org/saspus/duplicacy-web-docker-container
