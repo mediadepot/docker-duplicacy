@@ -12,7 +12,7 @@ This is a wrapper around http://duplicacy.com web GUI.
 ## To run
 An example for appropriate volume mappings:
 ``` bash 
- docker run --name duplicacy-web \
+ docker run --hostname duplicacy-web-docker-instance \
             -p 3875:3875/tcp \
             -v ~/Library/Duplicacy:/config  \
             -v ~/Library/Logs/Duplicacy/:/logs \
@@ -20,6 +20,8 @@ An example for appropriate volume mappings:
             -v ~:/backuproot:ro \
             saspus/duplicacy-web
 ```
+Note, it's imporatant to pass hostname, as duplicacy license is requested based on hostname and machine-id provided by dbus.
+
 ## To use
 Go to http://hostname:3875
 

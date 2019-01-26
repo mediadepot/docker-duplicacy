@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ENV VERSION=0.2.10
 
-RUN  apk --update add --no-cache bash ca-certificates && \
+RUN  apk --update add --no-cache bash ca-certificates dbus && \
     wget -nv -O /usr/local/bin/duplicacy_web                      \
         https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_${VERSION} && \
     chmod +x /usr/local/bin/duplicacy_web  && \
