@@ -21,6 +21,8 @@ if [ "$PERSISTENT_MACHINE_ID" == "true" ]; then
     fi
 fi
 
+chmod o+r,g+r /var/lib/dbus/machine-id
+
 echo Using machine-id = $(cat /var/lib/dbus/machine-id)
 
 # Starting child process
