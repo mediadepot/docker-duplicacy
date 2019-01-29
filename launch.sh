@@ -1,9 +1,6 @@
 #!/usr/bin/env bash  
 
-echo Running entrypoint as $(id -un)
-#trap 'kill ${!}; exit' SIGHUP SIGINT SIGQUIT SIGTERM
-
-echo Operating under user $(id -un):$(id -gn)\($(id -u):$(id -g)\)
+echo duplicacy_web runing as user $(id -un):$(id -gn)\($(id -u):$(id -g)\)
 
 if [ ! -d ~/.duplicacy-web ]; then
     ln -s /config/  ~/.duplicacy-web
