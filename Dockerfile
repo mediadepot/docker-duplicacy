@@ -25,7 +25,6 @@ RUN apk --update add --no-cache bash ca-certificates dbus  su-exec              
 EXPOSE 3875/tcp
 VOLUME /config /logs /cache
 
-COPY ./init.sh     /usr/local/bin/init.sh
-COPY ./launch.sh   /usr/local/bin/launch.sh  
+COPY ./init.sh ./launch.sh /usr/local/bin/
 
 ENTRYPOINT /usr/local/bin/init.sh
