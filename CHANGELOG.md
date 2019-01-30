@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Optimized machine-id persistence handling.
 - Removed option to disable machine-id persistence, it is now always saved to /config
-
+- duplicacy_web wget download log redirected to stdout now.
 
 ## [0.0.2] - 2019-01-29
 ### Fixed
