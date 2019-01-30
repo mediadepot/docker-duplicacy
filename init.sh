@@ -21,22 +21,17 @@ if [ $USR_ID -ne 0 ]; then
 fi
  
 # Configuring folders and permissions    
-mkdir -p    /config /logs /cache
+mkdir -p    				/config /logs /cache
 chown -R $USR_ID:$GRP_ID    /config /logs /cache
 
-if [ "$PERSISTENT_MACHINE_ID" == "true" ]; then
-    if [ -f /config/machine-id ]; then 
-        cp /config/machine-id /var/lib/dbus/machine-id
-    else
-        # remove backed-in machine-id
-        rm /var/lib/dbus/machine-id
-        # generate new machine-id
-        dbus-uuidgen --ensure 
-        # save machine-id into persistent storage
-        cp /var/lib/dbus/machine-id /config/machine-id
-    fi
+# Preparing persistent unique machine ID
+if ! dbus-uuidgen --ensure=/config/machine-id; then 
+	echo machine-id contains invalid data. Regenerating.
+	dbus-uuidgen > /config/machine-id
 fi
 
+# Copying machine-id to container
+cp /config/machine-id /var/lib/dbus/machine-id
 chmod o+r,g+r /var/lib/dbus/machine-id
 
 echo Using machine-id = $(cat /var/lib/dbus/machine-id)
