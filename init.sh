@@ -28,6 +28,11 @@ if [ "$PERSISTENT_MACHINE_ID" == "true" ]; then
     if [ -f /config/machine-id ]; then 
         cp /config/machine-id /var/lib/dbus/machine-id
     else
+        # remove backed-in machine-id
+        rm /var/lib/dbus/machine-id
+        # generate new machine-id
+        dbus-uuidgen --ensure 
+        # save machine-id into persistent storage
         cp /var/lib/dbus/machine-id /config/machine-id
     fi
 fi
