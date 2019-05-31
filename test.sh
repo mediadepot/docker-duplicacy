@@ -27,14 +27,23 @@ docker build --tag=saspus/duplicacy-web .                               || exit 
 #touch $temp/backuproot/yadayada $temp/backuproot/yadayada2
 #chown -R $(id -u):$(id -g) $temp/
 #run 
+
 docker run  --name duplicacy-web-container             \
         --hostname duplicacy-web-docker                \
          --publish 3875:3875/tcp                       \
-             --env USR_ID=$(id -u)                     \
-             --env GRP_ID=$(id -g)                     \
+            --env USR_ID=$(id -u)                     \
+            --env GRP_ID=$(id -g)                       \
           --volume $temp/config:/config                \
           --volume $temp/logs:/logs                    \
           --volume $temp/cache:/cache                  \
           --volume $temp/backuproot:/backuproot:ro     \
           --volume $temp/storage:/storage              \
                    saspus/duplicacy-web 
+
+
+### STASH
+
+
+# https://github.com/moby/moby/issues/5509#issuecomment-45243772
+#CMD ["sh", "-c","/usr/local/bin/init.sh ${DUPLICACY_CLI_VERSION} ${DUPLICACY_CLI_FILENAME}"] 
+#echo init.sh runing as user $(id -un):$(id -gn)\($(id -u):$(id -g)\)
