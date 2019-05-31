@@ -39,7 +39,7 @@ if [ ! -f /config/duplicacy.json ]; then
 fi
 
 # Override the CLI version duplicacy_web would use to $DUPLICACY_CLI_VERSION
-jq --arg version $DUPLICACY_CLI_VERSION '.cli_version = $version' /config/duplicacy.json
+jq --arg version ${DUPLICACY_CLI_VERSION} '.cli_version = $version' /config/duplicacy.json
 
 # Force symlink to downloaded and baked in CLI to where duplicacy_web expects it 
 ln -s -f /usr/local/bin/${DUPLICACY_CLI_FILENAME} /config/bin/${DUPLICACY_CLI_FILENAME}
@@ -63,7 +63,6 @@ echo Using machine-id = $(cat /var/lib/dbus/machine-id)
 echo "Logging tail of the log from this moment on"
 su-exec $USR_ID:$GRP_ID tail -0 -f /logs/duplicacy_web.log & 
 
-echo "Starting duplicacy as user $(id -un):$(id -gn)\($(id -u):$(id -g)\)"
 su-exec $USR_ID:$GRP_ID duplicacy_web & 
 
 child=$!
