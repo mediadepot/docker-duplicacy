@@ -32,6 +32,7 @@ docker run  --name duplicacy-web-container             \
          --publish 3875:3875/tcp                       \
              --env USR_ID=$(id -u)                     \
              --env GRP_ID=$(id -g)                     \
+             --env TZ="America/Los_Angeles"            \
           --volume $temp/config:/config                \
           --volume $temp/logs:/logs                    \
           --volume $temp/cache:/cache                  \
