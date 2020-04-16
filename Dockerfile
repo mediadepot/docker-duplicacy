@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV DUPLICACY_WEB_VERSION=1.2.1
+ENV DUPLICACY_WEB_VERSION=1.3.0
 
 # Set to actual USR_ID and GRP_ID of the user this should run under
 # Uses root by default, unless changed
