@@ -26,19 +26,18 @@ Notes:
 
 `TZ`: time zone. Refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-`DWE_PASSWORD`: password that encrypts the configuration file. Specifying it allows duplicacy to work completely unattended. Not specifying it will required someone to login to duplicacy web after container starts in order for it to access configuration file. 
-
 `USR_ID` and `GRP_ID` can be customized. Container will run as that user. By default user `0` (`root`) is used.
 
 ### `:mini` only
 `DUPLICACY_WEB_VERSION`: Specifies version of duplicacy_web to fetch and use. 
 
-To appy the changes restart the containter. This makes the `:mini` version behave more like a thin adapter layer as opposed to true self-encompassing container. 
+To apply the changes restart the container. This makes the `:mini` version behave more like a thin adapter layer as opposed to true self-encompassing container. 
 
+Note, since Duplicacy Web verion 1.4.1 `DWE_PASSWORD` environment variable is no longer necessary.
 
 ## To run
 
-An example for `:mini` branch; the duplicay_web version is selectable via environment variable:
+An example for `:mini` branch; the duplicacy_web version is selectable via environment variable:
 ``` bash 
 docker run  --name duplicacy-web-docker-container         \
         --hostname duplicacy-web-docker-instance          \
@@ -46,8 +45,7 @@ docker run  --name duplicacy-web-docker-container         \
              --env USR_ID=$(id -u)                        \
              --env GRP_ID=$(id -g)                        \
              --env TZ="America/Los_Angeles"               \
-             --env DWE_PASSWORD="duplicacy_web_password"  \
-             --env DUPLICACY_WEB_VERSION="1.4.0"          \
+             --env DUPLICACY_WEB_VERSION="1.4.1"          \
           --volume ~/Library/Duplicacy:/config            \
           --volume ~/Library/Logs/Duplicacy/:/logs        \
           --volume ~/Library/Caches/Duplicacy:/cache      \
@@ -55,7 +53,7 @@ docker run  --name duplicacy-web-docker-container         \
                    saspus/duplicacy-web:mini 
 ```
 
-An example for `:latest` branch; the duplicacy_web version is baked into the contatiner:
+An example for `:latest` branch; the duplicacy_web version is baked into the container:
 ``` bash 
 docker run  --name duplicacy-web-docker-container         \
         --hostname duplicacy-web-docker-instance          \
@@ -63,14 +61,12 @@ docker run  --name duplicacy-web-docker-container         \
              --env USR_ID=$(id -u)                        \
              --env GRP_ID=$(id -g)                        \
              --env TZ="America/Los_Angeles"               \
-             --env DWE_PASSWORD="duplicacy_web_password"  \
           --volume ~/Library/Duplicacy:/config            \
           --volume ~/Library/Logs/Duplicacy/:/logs        \
           --volume ~/Library/Caches/Duplicacy:/cache      \
           --volume ~:/backuproot:ro                       \
                    saspus/duplicacy-web:latest 
 ```
-
 
 Note, it's important to pass hostname, as duplicacy license is requested based on hostname and machine-id provided by dbus. Machine-id will be persisted in the /config directory.
 
