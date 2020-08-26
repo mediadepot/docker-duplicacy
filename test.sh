@@ -26,4 +26,4 @@ docker run  --name duplicacy-web-container             \
           --volume $temp/cache:/cache                  \
           --volume $temp/backuproot:/backuproot:ro     \
           --volume $temp/storage:/storage              \
-                   saspus/duplicacy-web:test
+                   saspus/duplicacy-web:latest
