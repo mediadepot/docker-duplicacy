@@ -4,11 +4,12 @@ This is a wrapper around http://duplicacy.com web GUI.
 
 Two branches are supported:
 
-- `latest`: the classic one with the fixed version of duplicacy_web baked into the image. Supports x86_64 and ARMv7.
-- `mini`: The container downloads and caches the specified duplicacy_web on start. To update/downgrade to another version change the environment variable and restart the container. Supports x86_x64 and ARMv7. 
+- `latest`: the classic one with the fixed version of duplicacy_web baked into the image. x86_64 only.
+- `mini`: The container downloads and caches the correct binary of duplicacy_web for the host architecture and selected version on start. To update/downgrade to another version change the environment variable and restart the container. Supports x86_x64 and arm. 
 
 Notes:
 
+- Arm detection is untested.
 - Download-on-demand approach was already used by duplicacy_web to fetch the updated version of a duplicacy cli engine. The `mini` container now extends this behavior to duplicacy_web itself making it easy to switch between versions at your cadence.
 
 ## Volumes 
@@ -32,7 +33,6 @@ Notes:
 
 To apply the changes restart the container. This makes the `:mini` version behave more like a thin adapter layer as opposed to true self-encompassing container. 
 
-Note, since Duplicacy Web verion 1.4.1 `DWE_PASSWORD` environment variable is no longer necessary.
 
 ## To run
 
@@ -67,7 +67,11 @@ docker run  --name duplicacy-web-docker-container         \
                    saspus/duplicacy-web:latest 
 ```
 
+
 Note, it's important to pass hostname, as duplicacy license is requested based on hostname and machine-id provided by dbus. Machine-id will be persisted in the /config directory.
 
 ## To use
 Go to http://hostname:3875
+
+## Source
+https://bitbucket.org/saspus/duplicacy-web-docker-container
