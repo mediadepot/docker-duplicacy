@@ -4,7 +4,7 @@ This is a wrapper around http://duplicacy.com web GUI.
 
 Two branches are supported:
 
-- `latest`: the classic one with the fixed version of duplicacy_web baked into the image. x86_64 and ARMv7.
+- `latest`: the classic one with the fixed version of duplicacy_web baked into the image. Supports x86_64 and ARMv7.
 - `mini`: The container downloads and caches the specified duplicacy_web on start. To update/downgrade to another version change the environment variable and restart the container. Supports x86_x64 and ARMv7. 
 
 Notes:
@@ -71,6 +71,3 @@ Note, it's important to pass hostname, as duplicacy license is requested based o
 
 ## To use
 Go to http://hostname:3875
-
-## Source
-https://bitbucket.org/saspus/duplicacy-web-docker-container
