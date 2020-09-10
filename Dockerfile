@@ -13,8 +13,7 @@ ARG DUPLICACY_WEB_VERSION
 
 # Installing software
 RUN apk --update add --no-cache bash ca-certificates dbus  su-exec tzdata                                       &&  \
-    export DUPLICACY_ARCH=$([ $TARGETARCH = "amd64" ] && echo "x64" || echo $TARGETARCH)                        &&  \
-    export DUPLICACY_URL=https://acrosync.com/duplicacy-web/duplicacy_web_linux_${DUPLICACY_ARCH}_${DUPLICACY_WEB_VERSION} && \
+    export DUPLICACY_URL=https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_1.4.0 && \
     echo "Fetching duplicacy binary from ${DUPLICACY_URL}"                                                      && \
     wget -nv -O /usr/local/bin/duplicacy_web  ${DUPLICACY_URL} 2>&1                                             && \
     chmod +x /usr/local/bin/duplicacy_web                                                                       && \
