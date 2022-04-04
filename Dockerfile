@@ -9,11 +9,11 @@ ENV USR_ID=0 \
 ENV TZ="America/Los_Angeles"
 
 ARG TARGETARCH
-ARG DUPLICACY_WEB_VERSION
+ARG DUPLICACY_WEB_VERSION=1.5.0
 
 # Installing software
 RUN apk --update add --no-cache bash ca-certificates dbus  su-exec tzdata                                       &&  \
-    export DUPLICACY_URL=https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_1.4.0 && \
+    export DUPLICACY_URL=https://acrosync.com/duplicacy-web/duplicacy_web_linux_x64_${DUPLICACY_WEB_VERSION} && \
     echo "Fetching duplicacy binary from ${DUPLICACY_URL}"                                                      && \
     wget -nv -O /usr/local/bin/duplicacy_web  ${DUPLICACY_URL} 2>&1                                             && \
     chmod +x /usr/local/bin/duplicacy_web                                                                       && \
