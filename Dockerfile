@@ -9,7 +9,7 @@ ENV USR_ID=0 \
 ENV TZ="America/Los_Angeles"
 
 ARG TARGETARCH
-ARG DUPLICACY_WEB_VERSION=1.5.0
+ARG DUPLICACY_WEB_VERSION=1.8.3
 
 # Installing software
 RUN apk --update add --no-cache bash ca-certificates dbus  su-exec tzdata                                       &&  \
